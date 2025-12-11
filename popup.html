@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FormGuard</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L4 6V12C4 16.5 7.5 20.5 12 22C16.5 20.5 20 16.5 20 12V6L12 2Z" stroke="url(#grad)" stroke-width="2" fill="none"/>
+          <path d="M9 12L11 14L15 10" stroke="url(#grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <defs>
+            <linearGradient id="grad" x1="4" y1="2" x2="20" y2="22">
+              <stop offset="0%" stop-color="#6366f1"/>
+              <stop offset="100%" stop-color="#8b5cf6"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <h1>FormGuard</h1>
+      </div>
+    </header>
+
+    <!-- Domain Info -->
+    <div class="domain-section">
+      <span class="label">Current Site</span>
+      <span class="domain" id="currentDomain">Loading...</span>
+    </div>
+
+    <!-- Status -->
+    <div class="status-section" id="statusSection">
+      <div class="status-item">
+        <span class="status-label">Saved Fields</span>
+        <span class="status-value" id="fieldCount">0</span>
+      </div>
+      <div class="status-item">
+        <span class="status-label">Last Saved</span>
+        <span class="status-value" id="lastSaved">Never</span>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="actions">
+      <button class="btn btn-primary" id="restoreBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+          <path d="M3 3v5h5"/>
+        </svg>
+        Restore Form
+      </button>
+      <button class="btn btn-secondary" id="clearBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14z"/>
+        </svg>
+        Clear Data
+      </button>
+    </div>
+
+    <!-- Toggle -->
+    <div class="toggle-section">
+      <div class="toggle-info">
+        <span class="toggle-label">Auto-Save</span>
+        <span class="toggle-desc">Save form data on this site</span>
+      </div>
+      <label class="toggle">
+        <input type="checkbox" id="enableToggle" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <a href="demo.html" id="demoLink" class="demo-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <path d="M14 2v6h6"/>
+          <path d="M16 13H8M16 17H8M10 9H8"/>
+        </svg>
+        Open Demo Form
+      </a>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FormGuard Demo</title>
+    <link rel="stylesheet" href="demo.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L4 6V12C4 16.5 7.5 20.5 12 22C16.5 20.5 20 16.5 20 12V6L12 2Z" stroke="url(#grad)"
+                        stroke-width="2" fill="none" />
+                    <path d="M9 12L11 14L15 10" stroke="url(#grad)" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <defs>
+                        <linearGradient id="grad" x1="4" y1="2" x2="20" y2="22">
+                            <stop offset="0%" stop-color="#6366f1" />
+                            <stop offset="100%" stop-color="#8b5cf6" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <h1>FormGuard Demo</h1>
+            </div>
+            <p class="subtitle">Test the auto-save and restore functionality</p>
+        </header>
+
+        <!-- Instructions -->
+        <div class="instructions">
+            <h2>How to Test</h2>
+            <ol>
+                <li>Fill in the form fields below</li>
+                <li>Wait 1-2 seconds for auto-save</li>
+                <li>Refresh the page (F5 or Ctrl+R)</li>
+                <li>Click the FormGuard extension icon</li>
+                <li>Click "Restore Form" to recover your data</li>
+            </ol>
+        </div>
+
+        <!-- Demo Form -->
+        <form class="demo-form" id="demoForm">
+            <h2>Sample Contact Form</h2>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" placeholder="John">
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" placeholder="Doe">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="john.doe@example.com">
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="company">Company</label>
+                    <input type="text" id="company" name="company" placeholder="Acme Inc.">
+                </div>
+                <div class="form-group">
+                    <label for="jobTitle">Job Title</label>
+                    <input type="text" id="jobTitle" name="jobTitle" placeholder="Software Engineer">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select id="category" name="category">
+                    <option value="">Select a category...</option>
+                    <option value="general">General Inquiry</option>
+                    <option value="support">Technical Support</option>
+                    <option value="sales">Sales</option>
+                    <option value="feedback">Feedback</option>
+                    <option value="partnership">Partnership</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="4" placeholder="Write your message here..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="website">Website URL</label>
+                <input type="url" id="website" name="website" placeholder="https://example.com">
+            </div>
+
+            <button type="submit" class="btn-submit">Submit Form</button>
+        </form>
+
+        <!-- Status -->
+        <div class="status-bar" id="statusBar">
+            <span class="status-indicator"></span>
+            <span class="status-text">Waiting for input...</span>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>FormGuard - Your form data is always safe</p>
+            <p class="privacy-note">All data is stored locally in your browser. Nothing is sent to any server.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Status updates
+        const statusBar = document.getElementById('statusBar');
+        const statusText = statusBar.querySelector('.status-text');
+        const statusIndicator = statusBar.querySelector('.status-indicator');
+
+        let inputTimeout;
+
+        // Listen for any input
+        document.querySelectorAll('input, textarea, select').forEach(field => {
+            field.addEventListener('input', () => {
+                statusIndicator.style.background = '#fbbf24';
+                statusText.textContent = 'Saving...';
+
+                clearTimeout(inputTimeout);
+                inputTimeout = setTimeout(() => {
+                    statusIndicator.style.background = '#22c55e';
+                    statusText.textContent = 'Saved automatically!';
+                }, 1200);
+            });
+        });
+
+        // Prevent form submission (demo only)
+        document.getElementById('demoForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('This is a demo form. Your data has been saved by FormGuard!');
+        });
+    </script>
+</body>
+
+</html>
